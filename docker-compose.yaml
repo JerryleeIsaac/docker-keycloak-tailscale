@@ -1,0 +1,29 @@
+version: "2.2"
+
+services:
+  keycloak:
+    container_name: keycloak
+    build:
+      context: .
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin # changethis
+      - KC_HTTP_ENABLED=true
+      - KC_HOSTNAME_STRICT=false
+      - KC_DB=mariadb
+      - KC_DB_PASSWORD=password
+      - KC_DB_USERNAME=user
+      - KC_DB_URL_HOST=mariadb
+      - KC_DB_URL_PORT=3306
+      - KC_DB_SCHEMA=keycloak
+
+      - TS_AUTHKEY=<ts_authkey>
+      - TS_DOMAIN=<ts_domain>
+      - TS_HOSTNAME=<ts_hostname>
+    volumes:
+      - ./tailscale:/var/lib/tailscale
+      - <cert-file>:/opt/certs/cert.crt
+      - <key-file>:/opt/certs/cert.key
+      - /dev/net/tun:/dev/net/tun # mount tun device
+    privileged: true
+    restart: unless-stopped
