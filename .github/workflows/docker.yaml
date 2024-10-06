@@ -9,6 +9,11 @@ on:
   pull_request:
     branches:
       - 'main'
+  workflow_dispatch:
+    inputs:
+      ref_name:
+        required: false
+        description: "Git hash / branch / tag to be deployed"
       
 env:
   REGISTRY: ghcr.io
