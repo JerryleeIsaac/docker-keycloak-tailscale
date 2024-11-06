@@ -24,6 +24,7 @@ RUN curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.
 
 RUN apt update
 RUN apt install tailscale -y
+RUN tailscale update
 
 WORKDIR /opt/keycloak
 
